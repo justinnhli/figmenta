@@ -1,7 +1,104 @@
+import numpy as np
 from bokeh.plotting import figure, ColumnDataSource
 from bokeh.models import HoverTool
 
-def autovis(df, ys, xs=None, **kwargs):
+class Dimension:
+    def __init__(self, df, col):
+        df = df[[col, '_y']]
+        self.name = col
+        self.uniques = df[col].drop_duplicates()
+        self.num_uniques = len(self.uniques)
+        dtype = df[col].dtypes
+        if dtype == np.object:
+            self.datatype = 'categorical'
+        else:
+            num_deltas = self.uniques.sort_values().diff().iloc[1:].drop_duplicates().shape[0]
+            if num_deltas == 1:
+                self.datatype = 'sequence'
+            else:
+                self.datatype = 'numeric'
+        num_ys = df.groupby([col]).count()['_y'].drop_duplicates().shape[0]
+        if num_ys == 1:
+            self.xy_mapping = 'one-to-one'
+        else:
+            self.xy_mapping = 'one-to-many'
+
+def autovis(df, xs=None, ys=None, fig_args=None, glyph_args=None):
+    # FIXME better solution for NaNs
+    df = df.copy()
+    df.dropna(inplace=True)
+    df['_y'] = '\t'.join(df[y].to_string() for y in ys)
+    if xs is None:
+        xs = []
+    if ys is None:
+        ys = []
+    if fig_args is None:
+        fig_args = {}
+    if glyph_args is None:
+        glyph_args = {}
+    x_dims = [Dimension(df, x) for x in xs]
+    return dispatch_chart(df, xs, x_dims, ys, fig_args, glyph_args)
+
+def dispatch_chart(df, xs, x_dims, ys, fig_args, glyph_args):
     x_dim = len(xs)
     y_dim = len(ys)
-    pass
+    if x_dims[0].datatype == 'categorical':
+        return bar_chart(df, xs[0], ys[0], fig_args, glyph_args)
+    elif x_dims[0].datatype == 'sequence':
+        return line_chart(df, xs[0], ys[0], fig_args, glyph_args)
+    elif x_dims[0].datatype == 'numeric':
+        return scatter_plot(df, xs[0], ys[0], fig_args, glyph_args)
+
+def bar_chart(df, x, y, fig_args, glyph_args):
+    print('bar chart')
+    df['_y'] = df[y] / 2
+    f = figure(x_range=list(df[x]), **fig_args)
+    renderer = f.rect(
+            x=x,
+            y='_y',
+            width=1,
+            height=y,
+            source=ColumnDataSource(df),
+            **glyph_args
+    )
+    f.add_tools(HoverTool(renderers=[renderer], tooltips=[
+        (x, '@{}'.format(x)),
+        (y, '@{}'.format(y)),
+    ]))
+    return f
+
+def line_chart(df, x, y, fig_args, glyph_args):
+    print('line chart')
+    f = figure(**fig_args)
+    renderer = f.square(
+            x=x,
+            y=y,
+            source=ColumnDataSource(df),
+            **glyph_args
+    )
+    f.add_tools(HoverTool(renderers=[renderer], tooltips=[
+        (x, '@{}'.format(x)),
+        (y, '@{}'.format(y)),
+    ]))
+    f.line(
+            x=x,
+            y=y,
+            source=ColumnDataSource(df),
+            **glyph_args
+    )
+    return f
+
+def scatter_plot(df, x, y, fig_args, glyph_args):
+    print('scatter_plot')
+    f = figure(**fig_args)
+    renderer = f.circle(
+            x=x,
+            y=y,
+            source=ColumnDataSource(df),
+            **glyph_args
+    )
+    f.add_tools(HoverTool(renderers=[renderer], tooltips=[
+        (x, '@{}'.format(x)),
+        (y, '@{}'.format(y)),
+    ]))
+    return f
