@@ -1,0 +1,18 @@
+x_dim  y_dim  x1_type              x1_uniq  xy_mapping   chart_type
+0      1      none                 few      one-to-many  box plot
+0      2      none                 few      one-to-many  scatter plot
+0      3      none                 few      one-to-many  3D scatter plot
+1      1      categorical          few      one-to-many  box plot
+1      1      categorical          many     one-to-many  box plot
+1      1      arithmetic sequence  few      one-to-many  box plot
+1      1      arithmetic sequence  many     one-to-many  box plot
+1      1      other numeric        few      one-to-many  scatter plot
+1      1      other numeric        many     one-to-many  scatter plot
+1      1      categorical          few      one-to-one   bar chart
+1      1      categorical          many     one-to-one   bar chart
+1      1      arithmetic sequence  few      one-to-one   line chart
+1      1      arithmetic sequence  many     one-to-one   line chart
+1      1      other numeric        few      one-to-one   scatter plot
+1      1      other numeric        many     one-to-one   scatter plot
+1      2      categorical          few      one-to-many  scatter plot
+1      3      categorical          few      one-to-many  3D scatter plot
