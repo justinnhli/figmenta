@@ -28,18 +28,24 @@ class Dimension:
         self.is_injective = (num_ys == 1)
 
 def autovis(df, xs=None, ys=None, fig_args=None, glyph_args=None):
-    # FIXME better solution for NaNs
-    df = df.copy()
-    df.dropna(inplace=True)
-    df['_y'] = '\t'.join(df[y].to_string() for y in ys)
+    # error check and fill in defaults
     if xs is None:
         xs = []
+    else:
+        assert isinstance(xs, list)
     if ys is None:
         ys = []
+    else:
+        assert isinstance(ys, list)
     if fig_args is None:
         fig_args = {}
     if glyph_args is None:
         glyph_args = {}
+    # infer properties
+    df = df.copy()
+    # FIXME better solution for NaNs
+    df.dropna(inplace=True)
+    df['_y'] = '\t'.join(df[y].to_string() for y in ys)
     x_dims = [Dimension(df, x) for x in xs]
     return dispatch_chart(df, xs, x_dims, ys, fig_args, glyph_args)
 
