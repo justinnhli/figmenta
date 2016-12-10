@@ -49,17 +49,17 @@ def autovis(df, xs=None, ys=None, fig_args=None, glyph_args=None):
     x_dims = [Dimension(df, x) for x in xs]
     df = df.groupby(xs + ys, as_index=False).count()
     # dispatch and draw
-    return dispatch_chart(df, xs, x_dims, ys, fig_args, glyph_args)
+    return dispatch_chart(df, x_dims, ys, fig_args, glyph_args)
 
-def dispatch_chart(df, xs, x_dims, ys, fig_args, glyph_args):
-    x_dim = len(xs)
+def dispatch_chart(df, x_dims, ys, fig_args, glyph_args):
+    x_dim = len(x_dims)
     y_dim = len(ys)
     if x_dims[0].datatype == Dimension.Type.CATEGORICAL:
-        return bar_chart(df, xs[0], ys[0], fig_args, glyph_args)
+        return bar_chart(df, x_dims[0].name, ys[0], fig_args, glyph_args)
     elif x_dims[0].datatype == Dimension.Type.SEQUENCE:
-        return line_chart(df, xs[0], ys[0], fig_args, glyph_args)
+        return line_chart(df, x_dims[0].name, ys[0], fig_args, glyph_args)
     elif x_dims[0].datatype == Dimension.Type.NUMERIC:
-        return scatter_plot(df, xs[0], ys[0], fig_args, glyph_args)
+        return scatter_plot(df, x_dims[0].name, ys[0], fig_args, glyph_args)
 
 def bar_chart(df, x, y, fig_args, glyph_args):
     print('bar chart')
