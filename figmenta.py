@@ -25,10 +25,7 @@ class Dimension:
             else:
                 self.datatype = Dimension.Type.NUMERIC
         num_ys = df.groupby([col]).count()['_y'].drop_duplicates().shape[0]
-        if num_ys == 1:
-            self.xy_mapping = 'one-to-one'
-        else:
-            self.xy_mapping = 'one-to-many'
+        self.is_injective = (num_ys == 1)
 
 def autovis(df, xs=None, ys=None, fig_args=None, glyph_args=None):
     # FIXME better solution for NaNs
