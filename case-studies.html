@@ -5,13 +5,17 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<style>
-			img {max-width:500px; max-height:500px;}
-			td {vertical-align:top;}
+			img {max-width:600px; max-height:600px;}
+			table#main td {vertical-align:top;}
+			table.properties, table.properties th, table.properties td {border:1px solid #000000;}
+			table.properties {border-collapse:collapse;}
+			table.properties th, table.properties td {padding:0.1ex 1ex; vertical-align:middle;}
+			.section-heading {font-size:larger; line-height:1.5em;}
 		</style>
 	</head>
 
 	<body>
-		<table>
+		<table id="main">
 			<tr>
 				<td>
 					<a href="https://www.reddit.com/r/dataisbeautiful/comments/4vcxd0/almost_all_men_are_stronger_than_almost_all_women/">
@@ -19,64 +23,39 @@
 					</a>
 				</td>
 				<td>
-					<p class="sectionheading">Independent Variables (2)</p>
-					<table>
+					<table class="properties">
 						<tr>
 							<th>Variable</th>
 							<th>Visual Representation</th>
-							<th>Dimension Properties</th>
+							<th>Dimension Type</th>
+							<th># Uniques</th>
 						</tr>
+						<tr><th colspan="4" class="section-heading">X (2)</th></tr>
 						<tr>
-							<td>Age</td>
+							<th>Age</th>
 							<td>X Axis</td>
-							<td>
-								<ul>
-									<li>Sequence</li>
-								</ul>
-							</td>
+							<td>Sequence</td>
+							<td>Many</td>
 						</tr>
 						<tr>
-							<td>Sex</td>
+							<th>Sex</th>
 							<td>Color</td>
-							<td>
-								<ul>
-									<li>Categorical</li>
-								</ul>
-							</td>
+							<td>Categorical</td>
+							<td>2</td>
 						</tr>
-					</table>
-					<p class="sectionheading">Dependent Variables (1)</p>
-					<table>
+						<tr><th colspan="4" class="section-heading">Y (1)</th></tr>
 						<tr>
-							<th>Variable</th>
-							<th>Visual Representation</th>
-							<th>Dimension Properties</th>
-						</tr>
-						<tr>
-							<td>Grip Strength</td>
+							<th>Grip Strength</th>
 							<td>Y Axis</td>
-							<td>
-								<ul>
-									<li>Numeric</li>
-								</ul>
-							</td>
+							<td>Numeric</td>
+							<td>Many</td>
 						</tr>
-					</table>
-					<p class="sectionheading">Population Variables (1)</p>
-					<table>
+						<tr><th colspan="4" class="section-heading">Population (1)</th></tr>
 						<tr>
-							<th>Variable</th>
-							<th>Visual Representation</th>
-							<th>Dimension Properties</th>
-						</tr>
-						<tr>
-							<td>Sample Size</td>
+							<th>Sample Size</th>
 							<td>Glyph Size</td>
-							<td>
-								<ul>
-									<li>Numeric</li>
-								</ul>
-							</td>
+							<td>Numeric</td>
+							<td>Many</td>
 						</tr>
 					</table>
 				</td>
