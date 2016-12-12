@@ -45,8 +45,19 @@ def build_dtree(df, y, depth=0):
         root.children[val] = build_dtree(child_df, y, depth=depth+1)
     return root
 
+def expand_features(df):
+    df['HAS_CATEGORICAL'] = (df['X1_TYPE'] == 'categorical') | (df['X2_TYPE'] == 'categorical')
+    df['HAS_CATEGORICAL'] = df['HAS_CATEGORICAL'].map(lambda b: 'yes' if b else 'no')
+    df['HAS_SEQUENCE'] = (df['X1_TYPE'] == 'sequence') | (df['X2_TYPE'] == 'sequence')
+    df['HAS_SEQUENCE'] = df['HAS_SEQUENCE'].map(lambda b: 'yes' if b else 'no')
+    df['HAS_NUMERIC'] = (df['X1_TYPE'] == 'numeric') | (df['X2_TYPE'] == 'numeric')
+    df['HAS_NUMERIC'] = df['HAS_NUMERIC'].map(lambda b: 'yes' if b else 'no')
+    return df
+
 def main():
     df = pd.read_fwf('chart-types.csv')
+    df = df[df['CHART_TYPE'] != 'FIXME']
+    df = expand_features(df)
     dtree = build_dtree(df, 'CHART_TYPE')
     dtree.pretty_print()
 
