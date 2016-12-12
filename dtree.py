@@ -47,7 +47,7 @@ def build_dtree(df, y, depth=0):
 
 def main():
     df = pd.read_fwf('chart-types.csv')
-    dtree = build_dtree(df, 'chart_type')
+    dtree = build_dtree(df, 'CHART_TYPE')
     dtree.pretty_print()
 
 if __name__ == '__main__':

@@ -1,18 +1,164 @@
-x_dim  y_dim  x1_type              x1_uniq  xy_mapping   chart_type
-0      1      none                 few      one-to-many  box plot
-0      2      none                 few      one-to-many  scatter plot
-0      3      none                 few      one-to-many  3D scatter plot
-1      1      categorical          few      one-to-many  box plot
-1      1      categorical          many     one-to-many  box plot
-1      1      arithmetic sequence  few      one-to-many  box plot
-1      1      arithmetic sequence  many     one-to-many  box plot
-1      1      other numeric        few      one-to-many  scatter plot
-1      1      other numeric        many     one-to-many  scatter plot
-1      1      categorical          few      one-to-one   bar chart
-1      1      categorical          many     one-to-one   bar chart
-1      1      arithmetic sequence  few      one-to-one   line chart
-1      1      arithmetic sequence  many     one-to-one   line chart
-1      1      other numeric        few      one-to-one   scatter plot
-1      1      other numeric        many     one-to-one   scatter plot
-1      2      categorical          few      one-to-many  scatter plot
-1      3      categorical          few      one-to-many  3D scatter plot
+X_DIM  Y_DIM  X1_TYPE      X1_UNIQ  X2_TYPE      X2_UNIQ  FUNCTION_TYPE  POPULATION  CHART_TYPE
+0      1      none         few      none         few      surjective     ignore      FIXME
+1      1      categorical  few      none         few      bijective      ignore      bar_chart
+1      1      categorical  few      none         few      surjective     ignore      bar_chart
+1      1      categorical  many     none         few      bijective      ignore      FIXME
+1      1      categorical  many     none         few      surjective     ignore      FIXME
+1      1      numeric      few      none         few      bijective      ignore      scatter_plot
+1      1      numeric      few      none         few      surjective     ignore      scatter_plot
+1      1      numeric      many     none         few      bijective      ignore      scatter_plot
+1      1      numeric      many     none         few      surjective     ignore      scatter_plot
+1      1      sequence     few      none         few      bijective      ignore      line_chart
+1      1      sequence     few      none         few      surjective     ignore      line_chart
+1      1      sequence     many     none         few      bijective      ignore      line_chart
+1      1      sequence     many     none         few      surjective     ignore      line_chart
+1      1      time         few      none         few      bijective      ignore      FIXME
+1      1      time         few      none         few      surjective     ignore      FIXME
+1      1      time         many     none         few      bijective      ignore      FIXME
+1      1      time         many     none         few      surjective     ignore      FIXME
+2      1      categorical  few      categorical  few      bijective      ignore      grouped_bar_chart
+2      1      categorical  few      categorical  few      surjective     ignore      grouped_bar_chart
+2      1      categorical  few      categorical  many     bijective      ignore      FIXME
+2      1      categorical  few      categorical  many     surjective     ignore      FIXME
+2      1      categorical  few      sequence     few      bijective      ignore      line_chart_with_color
+2      1      categorical  few      sequence     few      surjective     ignore      line_chart_with_color
+2      1      categorical  few      sequence     many     bijective      ignore      FIXME
+2      1      categorical  few      sequence     many     surjective     ignore      FIXME
+2      1      categorical  few      numeric      few      bijective      ignore      scatter_plot_with_color
+2      1      categorical  few      numeric      few      surjective     ignore      scatter_plot_with_color
+2      1      categorical  few      numeric      many     bijective      ignore      FIXME
+2      1      categorical  few      numeric      many     surjective     ignore      FIXME
+2      1      categorical  many     categorical  many     bijective      ignore      FIXME
+2      1      categorical  many     categorical  many     surjective     ignore      FIXME
+2      1      categorical  many     numeric      few      bijective      ignore      FIXME
+2      1      categorical  many     numeric      few      surjective     ignore      FIXME
+2      1      categorical  many     numeric      many     bijective      ignore      FIXME
+2      1      categorical  many     numeric      many     surjective     ignore      FIXME
+2      1      categorical  many     sequence     few      bijective      ignore      FIXME
+2      1      categorical  many     sequence     few      surjective     ignore      FIXME
+2      1      categorical  many     sequence     many     bijective      ignore      FIXME
+2      1      categorical  many     sequence     many     surjective     ignore      FIXME
+2      1      sequence     few      numeric      few      bijective      ignore      FIXME
+2      1      sequence     few      numeric      few      surjective     ignore      FIXME
+2      1      sequence     few      numeric      many     bijective      ignore      FIXME
+2      1      sequence     few      numeric      many     surjective     ignore      FIXME
+2      1      sequence     few      sequence     few      bijective      ignore      FIXME
+2      1      sequence     few      sequence     few      surjective     ignore      FIXME
+2      1      sequence     few      sequence     many     bijective      ignore      FIXME
+2      1      sequence     few      sequence     many     surjective     ignore      FIXME
+2      1      sequence     many     numeric      few      bijective      ignore      FIXME
+2      1      sequence     many     numeric      few      surjective     ignore      FIXME
+2      1      sequence     many     numeric      many     bijective      ignore      FIXME
+2      1      sequence     many     numeric      many     surjective     ignore      FIXME
+2      1      sequence     many     sequence     many     bijective      ignore      FIXME
+2      1      sequence     many     sequence     many     surjective     ignore      FIXME
+2      1      numeric      few      numeric      few      bijective      ignore      3d_scatter_plot
+2      1      numeric      few      numeric      few      surjective     ignore      3d_scatter_plot
+2      1      numeric      few      numeric      many     bijective      ignore      3d_scatter_plot
+2      1      numeric      few      numeric      many     surjective     ignore      3d_scatter_plot
+2      1      numeric      many     numeric      many     bijective      ignore      3d_scatter_plot
+2      1      numeric      many     numeric      many     surjective     ignore      3d_scatter_plot
+0      2      none         few      none         few      surjective     ignore      scatter_plot
+1      2      categorical  few      none         few      bijective      ignore      scatter_plot_with_color
+1      2      categorical  few      none         few      surjective     ignore      scatter_plot_with_color
+1      2      categorical  many     none         few      bijective      ignore      FIXME
+1      2      categorical  many     none         few      surjective     ignore      FIXME
+1      2      numeric      few      none         few      bijective      ignore      FIXME
+1      2      numeric      few      none         few      surjective     ignore      FIXME
+1      2      numeric      many     none         few      bijective      ignore      FIXME
+1      2      numeric      many     none         few      surjective     ignore      FIXME
+1      2      sequence     few      none         few      bijective      ignore      FIXME
+1      2      sequence     few      none         few      surjective     ignore      FIXME
+1      2      sequence     many     none         few      bijective      ignore      FIXME
+1      2      sequence     many     none         few      surjective     ignore      FIXME
+1      2      time         few      none         few      bijective      ignore      FIXME
+1      2      time         few      none         few      surjective     ignore      FIXME
+1      2      time         many     none         few      bijective      ignore      FIXME
+1      2      time         many     none         few      surjective     ignore      FIXME
+2      2      categorical  few      categorical  few      bijective      ignore      FIXME
+2      2      categorical  few      categorical  few      surjective     ignore      FIXME
+2      2      categorical  few      categorical  many     bijective      ignore      FIXME
+2      2      categorical  few      categorical  many     surjective     ignore      FIXME
+2      2      categorical  few      numeric      few      bijective      ignore      FIXME
+2      2      categorical  few      numeric      few      surjective     ignore      FIXME
+2      2      categorical  few      numeric      many     bijective      ignore      FIXME
+2      2      categorical  few      numeric      many     surjective     ignore      FIXME
+2      2      categorical  few      sequence     few      bijective      ignore      FIXME
+2      2      categorical  few      sequence     few      surjective     ignore      FIXME
+2      2      categorical  few      sequence     many     bijective      ignore      FIXME
+2      2      categorical  few      sequence     many     surjective     ignore      FIXME
+2      2      categorical  many     categorical  few      bijective      ignore      FIXME
+2      2      categorical  many     categorical  few      surjective     ignore      FIXME
+2      2      categorical  many     categorical  many     bijective      ignore      FIXME
+2      2      categorical  many     categorical  many     surjective     ignore      FIXME
+2      2      categorical  many     numeric      few      bijective      ignore      FIXME
+2      2      categorical  many     numeric      few      surjective     ignore      FIXME
+2      2      categorical  many     numeric      many     bijective      ignore      FIXME
+2      2      categorical  many     numeric      many     surjective     ignore      FIXME
+2      2      categorical  many     sequence     few      bijective      ignore      FIXME
+2      2      categorical  many     sequence     few      surjective     ignore      FIXME
+2      2      categorical  many     sequence     many     bijective      ignore      FIXME
+2      2      categorical  many     sequence     many     surjective     ignore      FIXME
+2      2      numeric      few      numeric      few      bijective      ignore      FIXME
+2      2      numeric      few      numeric      few      surjective     ignore      FIXME
+2      2      numeric      few      numeric      many     bijective      ignore      FIXME
+2      2      numeric      few      numeric      many     surjective     ignore      FIXME
+2      2      numeric      many     numeric      many     bijective      ignore      FIXME
+2      2      numeric      many     numeric      many     surjective     ignore      FIXME
+2      2      sequence     few      numeric      few      bijective      ignore      FIXME
+2      2      sequence     few      numeric      few      surjective     ignore      FIXME
+2      2      sequence     few      numeric      many     bijective      ignore      FIXME
+2      2      sequence     few      numeric      many     surjective     ignore      FIXME
+2      2      sequence     few      sequence     few      bijective      ignore      FIXME
+2      2      sequence     few      sequence     few      surjective     ignore      FIXME
+2      2      sequence     few      sequence     many     bijective      ignore      FIXME
+2      2      sequence     few      sequence     many     surjective     ignore      FIXME
+2      2      sequence     many     numeric      few      bijective      ignore      FIXME
+2      2      sequence     many     numeric      few      surjective     ignore      FIXME
+2      2      sequence     many     numeric      many     bijective      ignore      FIXME
+2      2      sequence     many     numeric      many     surjective     ignore      FIXME
+2      2      sequence     many     sequence     many     bijective      ignore      FIXME
+2      2      sequence     many     sequence     many     surjective     ignore      FIXME
+0      3      none         few      none         few      surjective     ignore      FIXME
+2      3      categorical  few      categorical  few      bijective      ignore      FIXME
+2      3      categorical  few      categorical  few      surjective     ignore      FIXME
+2      3      categorical  few      categorical  many     bijective      ignore      FIXME
+2      3      categorical  few      categorical  many     surjective     ignore      FIXME
+2      3      categorical  few      numeric      few      bijective      ignore      FIXME
+2      3      categorical  few      numeric      few      surjective     ignore      FIXME
+2      3      categorical  few      numeric      many     bijective      ignore      FIXME
+2      3      categorical  few      numeric      many     surjective     ignore      FIXME
+2      3      categorical  few      sequence     few      bijective      ignore      FIXME
+2      3      categorical  few      sequence     few      surjective     ignore      FIXME
+2      3      categorical  few      sequence     many     bijective      ignore      FIXME
+2      3      categorical  few      sequence     many     surjective     ignore      FIXME
+2      3      categorical  many     categorical  many     bijective      ignore      FIXME
+2      3      categorical  many     categorical  many     surjective     ignore      FIXME
+2      3      categorical  many     numeric      few      bijective      ignore      FIXME
+2      3      categorical  many     numeric      few      surjective     ignore      FIXME
+2      3      categorical  many     numeric      many     bijective      ignore      FIXME
+2      3      categorical  many     numeric      many     surjective     ignore      FIXME
+2      3      categorical  many     sequence     few      bijective      ignore      FIXME
+2      3      categorical  many     sequence     few      surjective     ignore      FIXME
+2      3      categorical  many     sequence     many     bijective      ignore      FIXME
+2      3      categorical  many     sequence     many     surjective     ignore      FIXME
+2      3      numeric      few      numeric      few      bijective      ignore      FIXME
+2      3      numeric      few      numeric      few      surjective     ignore      FIXME
+2      3      numeric      few      numeric      many     bijective      ignore      FIXME
+2      3      numeric      few      numeric      many     surjective     ignore      FIXME
+2      3      numeric      many     numeric      many     bijective      ignore      FIXME
+2      3      numeric      many     numeric      many     surjective     ignore      FIXME
+2      3      sequence     few      numeric      few      bijective      ignore      FIXME
+2      3      sequence     few      numeric      few      surjective     ignore      FIXME
+2      3      sequence     few      numeric      many     bijective      ignore      FIXME
+2      3      sequence     few      numeric      many     surjective     ignore      FIXME
+2      3      sequence     few      sequence     few      bijective      ignore      FIXME
+2      3      sequence     few      sequence     few      surjective     ignore      FIXME
+2      3      sequence     few      sequence     many     bijective      ignore      FIXME
+2      3      sequence     few      sequence     many     surjective     ignore      FIXME
+2      3      sequence     many     numeric      few      bijective      ignore      FIXME
+2      3      sequence     many     numeric      few      surjective     ignore      FIXME
+2      3      sequence     many     numeric      many     bijective      ignore      FIXME
+2      3      sequence     many     numeric      many     surjective     ignore      FIXME
+2      3      sequence     many     sequence     many     bijective      ignore      FIXME
+2      3      sequence     many     sequence     many     surjective     ignore      FIXME
