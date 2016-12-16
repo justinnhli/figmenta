@@ -1,1 +1,1 @@
-from figmenta import autovis
+from .figmenta import autovis
