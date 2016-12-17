@@ -1,3 +1,4 @@
+from copy import copy
 from enum import Enum, unique as enum_unique
 
 import numpy as np
@@ -39,8 +40,12 @@ def autovis(df, xs=None, ys=None, fig_args=None, glyph_args=None):
         assert isinstance(ys, list)
     if fig_args is None:
         fig_args = {}
+    else:
+        fig_args = copy(fig_args)
     if glyph_args is None:
         glyph_args = {}
+    else:
+        glyph_args = copy(glyph_args)
     # infer properties
     df = df.copy()[xs + ys]
     # FIXME better solution for NaNs
@@ -64,7 +69,10 @@ def dispatch_chart(df, x_dims, ys, fig_args, glyph_args):
 def bar_chart(df, x, y, fig_args, glyph_args):
     print('bar chart')
     df['_y'] = df[y] / 2
-    f = figure(x_range=list(df[x]), **fig_args)
+    fig_args.setdefault('x_range', list(df[x]))
+    fig_args.setdefault('x_axis_label', x.title())
+    fig_args.setdefault('y_axis_label', y.title())
+    f = figure(**fig_args)
     renderer = f.rect(
             x=x,
             y='_y',
@@ -81,6 +89,8 @@ def bar_chart(df, x, y, fig_args, glyph_args):
 
 def line_chart(df, x, y, fig_args, glyph_args):
     print('line chart')
+    fig_args.setdefault('x_axis_label', x.title())
+    fig_args.setdefault('y_axis_label', y.title())
     f = figure(**fig_args)
     renderer = f.square(
             x=x,
@@ -102,6 +112,8 @@ def line_chart(df, x, y, fig_args, glyph_args):
 
 def scatter_plot(df, x, y, fig_args, glyph_args):
     print('scatter_plot')
+    fig_args.setdefault('x_axis_label', x.title())
+    fig_args.setdefault('y_axis_label', y.title())
     f = figure(**fig_args)
     renderer = f.circle(
             x=x,
