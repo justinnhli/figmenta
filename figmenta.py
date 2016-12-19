@@ -76,7 +76,7 @@ def bar_chart(df, x, y, fig_args, glyph_args):
     renderer = f.rect(
             x=x,
             y='_y',
-            width=1,
+            width=0.9,
             height=y,
             source=ColumnDataSource(df),
             **glyph_args
