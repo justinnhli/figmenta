@@ -70,6 +70,12 @@ def bar_chart(df, x, y, fig_args, glyph_args):
     df['_y'] = df[y] / 2
     fig_args.setdefault('x_range', list(df[x]))
     fig_args.setdefault('x_axis_label', x.title())
+    if min(df[y]) >= 0:
+        fig_args.setdefault('y_range', [0, 1.1 * max(df[y])])
+    elif max(df[y]) <= 0:
+        fig_args.setdefault('y_range', [1.1 * min(df[y]), 0])
+    else:
+        fig_args.setdefault('y_range', [1.1 * min(df[y]), 1.1 * max(df[y])])
     fig_args.setdefault('y_axis_label', y.title())
     f = figure(**fig_args)
     renderer = f.rect(
