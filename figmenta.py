@@ -67,7 +67,6 @@ def dispatch_chart(df, x_dims, ys, fig_args, glyph_args):
         return scatter_plot(df, x_dims[0].name, ys[0], fig_args, glyph_args)
 
 def bar_chart(df, x, y, fig_args, glyph_args):
-    print('bar chart')
     df['_y'] = df[y] / 2
     fig_args.setdefault('x_range', list(df[x]))
     fig_args.setdefault('x_axis_label', x.title())
@@ -88,7 +87,6 @@ def bar_chart(df, x, y, fig_args, glyph_args):
     return f
 
 def line_chart(df, x, y, fig_args, glyph_args):
-    print('line chart')
     fig_args.setdefault('x_axis_label', x.title())
     fig_args.setdefault('y_axis_label', y.title())
     f = figure(**fig_args)
@@ -111,7 +109,6 @@ def line_chart(df, x, y, fig_args, glyph_args):
     return f
 
 def scatter_plot(df, x, y, fig_args, glyph_args):
-    print('scatter_plot')
     fig_args.setdefault('x_axis_label', x.title())
     fig_args.setdefault('y_axis_label', y.title())
     f = figure(**fig_args)
