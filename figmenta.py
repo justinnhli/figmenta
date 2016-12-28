@@ -52,7 +52,7 @@ def autovis(df, xs=None, ys=None, fig_args=None, glyph_args=None):
     df.dropna(inplace=True)
     df['_y'] = '\t'.join(df[y].to_string() for y in ys)
     x_dims = [Dimension(df, x) for x in xs]
-    df = df.groupby(xs + ys, as_index=False).count()
+    df = df.groupby(xs + ys, sort=False, as_index=False).count()
     # dispatch and draw
     return dispatch_chart(df, x_dims, ys, fig_args, glyph_args)
 
