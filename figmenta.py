@@ -46,11 +46,12 @@ def autovis(df, xs=None, ys=None, fig_args=None, glyph_args=None):
         glyph_args = {}
     else:
         glyph_args = copy(glyph_args)
-    # infer properties
+    # copy the dataframe
     df = df.copy()[xs + ys]
     # FIXME better solution for NaNs
     df.dropna(inplace=True)
     df['_y'] = '\t'.join(df[y].to_string() for y in ys)
+    # infer properties
     x_dims = [Dimension(df, x) for x in xs]
     df = df.groupby(xs + ys, sort=False, as_index=False).count()
     # dispatch and draw
