@@ -18,8 +18,8 @@ X_DIM  Y_DIM  X1_TYPE      X1_UNIQ  X2_TYPE      X2_UNIQ  POPULATION  CHART_TYPE
 1      1      time         many     none         few      ignore      FIXME
 2      1      categorical  few      categorical  few      ignore      grouped_bar_chart
 2      1      categorical  few      categorical  few      ignore      grouped_bar_chart
-2      1      categorical  few      categorical  many     ignore      heat_map
-2      1      categorical  few      categorical  many     ignore      heat_map
+2      1      categorical  few      categorical  many     ignore      heat_map  # why heat Map?
+2      1      categorical  few      categorical  many     ignore      heat_map  # why heat Map?
 2      1      categorical  few      sequence     few      ignore      line_chart_with_color_category
 2      1      categorical  few      sequence     few      ignore      line_chart_with_color_category
 2      1      categorical  few      sequence     many     ignore      line_chart_with_color_category

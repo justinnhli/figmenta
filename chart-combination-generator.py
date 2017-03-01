@@ -26,16 +26,16 @@ Base_dim_dic = {
 
 result = []
 count = -1
-for a in Dimension:
+for dimensions in Dimension:
     for L in range(0, len(Costomization) + 1):
         for subset in itertools.combinations(Costomization, L):
-            k = [a, "+", subset]
+            k = [dimensions, "+", subset]
             count += 1
             result.append(k)
             nested_list = []
             for key in Base_dim_dic:
-                if a == key:
-                    b = Base_dim_dic.get(a)
+                if dimensions == key:
+                    b = Base_dim_dic.get(dimensions)
                     nested_list.append(b)
             for key in Filling_dic:
                 for i in range(len(subset)):
@@ -44,6 +44,7 @@ for a in Dimension:
                         nested_list.append(c)
             for subset in itertools.product(*nested_list):
                 result[count].append(subset)
+
 print(result)
 
 

@@ -12,7 +12,7 @@ class Dimension:
         SEQUENCE = 'SEQUENCE'
         NUMERIC = 'NUMERIC'
     def __init__(self, df, col):
-        df = df[[col, '_y']]
+        df = df[[col, '_y']]             # add an extra col to deal with unique(injective) and difference
         self.name = col
         self.uniques = df[col].drop_duplicates()
         self.num_uniques = len(self.uniques)
@@ -20,16 +20,16 @@ class Dimension:
         if dtype == np.object:
             self.datatype = Dimension.Type.CATEGORICAL
         else:
-            num_deltas = self.uniques.sort_values().diff().iloc[1:].drop_duplicates().shape[0]
+            num_deltas = self.uniques.sort_values().diff().iloc[1:].drop_duplicates().shape[0] # the number of difference
             if num_deltas == 1:
-                self.datatype = Dimension.Type.SEQUENCE
+                self.datatype = Dimension.Type.SEQUENCE # arithmetic sequence;
             else:
                 self.datatype = Dimension.Type.NUMERIC
-        num_ys = df.groupby([col]).count()['_y'].drop_duplicates().shape[0]
+        num_ys = df.groupby([col]).count()['_y'].drop_duplicates().shape[0] # the number of unique ys
         self.is_injective = (num_ys == 1)
 
 def autovis(df, xs=None, ys=None, fig_args=None, glyph_args=None):
-    # error check and fill in defaults
+    # error check and fill in defaults (what is the defaults?)
     if xs is None:
         xs = []
     else:
@@ -60,16 +60,41 @@ def autovis(df, xs=None, ys=None, fig_args=None, glyph_args=None):
 def dispatch_chart(df, x_dims, ys, fig_args, glyph_args):
     x_dim = len(x_dims)
     y_dim = len(ys)
-    if x_dims[0].datatype == Dimension.Type.CATEGORICAL:
-        return bar_chart(df, x_dims[0].name, ys[0], fig_args, glyph_args)
-    elif x_dims[0].datatype == Dimension.Type.SEQUENCE:
-        return line_chart(df, x_dims[0].name, ys[0], fig_args, glyph_args)
-    elif x_dims[0].datatype == Dimension.Type.NUMERIC:
-        return scatter_plot(df, x_dims[0].name, ys[0], fig_args, glyph_args)
+    if x_dim == 0 and y_dim == 1:
+        return # box_plot
+    elif x_dim == 1 and y_dim == 1:
+        if x_dims[0].datatype == Dimension.Type.CATEGORICAL:
+            return bar_chart(df, x_dims[0].name, ys[0], fig_args, glyph_args) # except many cata
+        elif x_dims[0].datatype == Dimension.Type.SEQUENCE:
+            return line_chart(df, x_dims[0].name, ys[0], fig_args, glyph_args)
+        elif x_dims[0].datatype == Dimension.Type.NUMERIC:
+            return scatter_plot(df, x_dims[0].name, ys[0], fig_args, glyph_args)
+    elif x_dim == 2 and y_dim == 1:
+        if x_dims[0].datatype == Dimension.Type.CATEGORICAL:
+            if x_dim < 13:  # arbitrary # for x_dim
+                if x_dims[1].datatype ==Dimension.Type.CATEGORICAL and y_dim < 13: ##### the branch of it bigger than 13
+                   return bar_chart(df, x_dims[0].name, ys[0], fig_args, glyph_args) # with group bar chart
+                elif x_dims[1].datatype == Dimension.Type.SEQUENCE:
+                    return line_chart(df, x_dims[0].name, ys[0], fig_args, glyph_args) # with color cata respect to xs
+                elif x_dims[1].datatype == Dimension.Type.NUMERIC:
+                    return scatter_plot(df, x_dims[0].name, ys[0], fig_args, glyph_args) # with color cata by respect to xs
+            elif x_dim >= 13:
+                if x_dims[1].datatype ==Dimension.Type.CATEGORICAL:
+                   return #  heat map
+                elif x_dims[1].datatype == Dimension.Type.SEQUENCE:
+                    return line_chart(df, x_dims[0].name, ys[0], fig_args, glyph_args) # with color cata respect to xs
+                elif x_dims[1].datatype == Dimension.Type.NUMERIC:
+                    return scatter_plot(df, x_dims[0].name, ys[0], fig_args, glyph_args)
+        elif x_dims[0].datatype == Dimension.Type.SEQUENCE:
+            if x_dims[1].datatype == Dimension.Type.CATEGORICAL:
+                return # heat map
+
+
+
 
 def bar_chart(df, x, y, fig_args, glyph_args):
     df['_y'] = df[y] / 2
-    fig_args.setdefault('x_range', list(df[x]))
+    fig_args.setdefault('x_range', list(df[x])) # what is list(df[x])
     fig_args.setdefault('x_axis_label', x.title())
     if min(df[y]) >= 0:
         fig_args.setdefault('y_range', [0, 1.1 * max(df[y])])
@@ -78,6 +103,7 @@ def bar_chart(df, x, y, fig_args, glyph_args):
     else:
         fig_args.setdefault('y_range', [1.1 * min(df[y]), 1.1 * max(df[y])])
     fig_args.setdefault('y_axis_label', y.title())
+
     f = figure(**fig_args)
     renderer = f.rect(
             x=x,
