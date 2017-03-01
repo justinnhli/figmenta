@@ -2,8 +2,10 @@ from copy import copy
 from enum import Enum, unique as enum_unique
 
 import numpy as np
+import pandas as pd
 from bokeh.plotting import figure, ColumnDataSource
 from bokeh.models import HoverTool
+from bokeh.palettes import *
 
 class Dimension:
     @enum_unique
@@ -64,37 +66,44 @@ def dispatch_chart(df, x_dims, ys, fig_args, glyph_args):
         return # box_plot
     elif x_dim == 1 and y_dim == 1:
         if x_dims[0].datatype == Dimension.Type.CATEGORICAL:
-            return bar_chart(df, x_dims[0].name, ys[0], fig_args, glyph_args) # except many cata
+            return bar_chart(df, x_dims[0].name, ys[0], fig_args, glyph_args) # except many data
         elif x_dims[0].datatype == Dimension.Type.SEQUENCE:
             return line_chart(df, x_dims[0].name, ys[0], fig_args, glyph_args)
         elif x_dims[0].datatype == Dimension.Type.NUMERIC:
             return scatter_plot(df, x_dims[0].name, ys[0], fig_args, glyph_args)
     elif x_dim == 2 and y_dim == 1:
         if x_dims[0].datatype == Dimension.Type.CATEGORICAL:
-            if x_dim < 13:  # arbitrary # for x_dim
-                if x_dims[1].datatype ==Dimension.Type.CATEGORICAL and y_dim < 13: ##### the branch of it bigger than 13
-                   return bar_chart(df, x_dims[0].name, ys[0], fig_args, glyph_args) # with group bar chart
+            if x_dims[1].num_uniques < 13:  # arbitrary # for x_dim
+                if x_dims[1].datatype == Dimension.Type.CATEGORICAL and y_dim < 13: ##### the branch of it bigger than 13
+                   return bar_chart(df, x_dims[0].name, ys[0], fig_args, glyph_args,
+                           groupby=x_dims[1].name) # with group bar chart
                 elif x_dims[1].datatype == Dimension.Type.SEQUENCE:
-                    return line_chart(df, x_dims[0].name, ys[0], fig_args, glyph_args) # with color cata respect to xs
+                    return line_chart(df, x_dims[0].name, ys[0], fig_args, glyph_args) # with color data respect to x[0]
                 elif x_dims[1].datatype == Dimension.Type.NUMERIC:
-                    return scatter_plot(df, x_dims[0].name, ys[0], fig_args, glyph_args) # with color cata by respect to xs
-            elif x_dim >= 13:
+                    return scatter_plot(df, x_dims[0].name, ys[0], fig_args, glyph_args) # with color data by respect to x[0]
+            else:
                 if x_dims[1].datatype ==Dimension.Type.CATEGORICAL:
                    return #  heat map
                 elif x_dims[1].datatype == Dimension.Type.SEQUENCE:
-                    return line_chart(df, x_dims[0].name, ys[0], fig_args, glyph_args) # with color cata respect to xs
+                    return line_chart(df, x_dims[0].name, ys[0], fig_args, glyph_args) # with color data respect to xs
                 elif x_dims[1].datatype == Dimension.Type.NUMERIC:
                     return scatter_plot(df, x_dims[0].name, ys[0], fig_args, glyph_args)
         elif x_dims[0].datatype == Dimension.Type.SEQUENCE:
             if x_dims[1].datatype == Dimension.Type.CATEGORICAL:
-                return # heat map
+                if x_dims[1].num_uniques < 13:  # arbitrary # for x_dim
+                    return None # FIXME colored line plot
+                else:
+                    return # heat map
 
 
 
 
-def bar_chart(df, x, y, fig_args, glyph_args):
-    df['_y'] = df[y] / 2
-    fig_args.setdefault('x_range', list(df[x])) # what is list(df[x])
+
+def bar_chart(df, x, y, fig_args, glyph_args, groupby=None):
+    if groupby is None:
+        df['_groupby'] = pd.Series(df.shape[0] * [''])
+        groupby = '_groupby'
+    fig_args.setdefault('x_range', list(df[x].unique())) # what is list(df[x])
     fig_args.setdefault('x_axis_label', x.title())
     if min(df[y]) >= 0:
         fig_args.setdefault('y_range', [0, 1.1 * max(df[y])])
@@ -104,19 +113,42 @@ def bar_chart(df, x, y, fig_args, glyph_args):
         fig_args.setdefault('y_range', [1.1 * min(df[y]), 1.1 * max(df[y])])
     fig_args.setdefault('y_axis_label', y.title())
 
+    num_groups = len(list(df[groupby].unique()))
     f = figure(**fig_args)
-    renderer = f.rect(
-            x=x,
-            y='_y',
-            width=0.9,
-            height=y,
-            source=ColumnDataSource(df),
-            **glyph_args
-    )
-    f.add_tools(HoverTool(renderers=[renderer], tooltips=[
-        (x, '@{}'.format(x)),
-        (y, '@{}'.format(y)),
-    ]))
+    for i, group in enumerate(df[groupby].unique()):
+        plot_df = df[df[groupby] == group].copy().reset_index()
+        plot_df['_x'] = plot_df.index + (num_groups + i) / (num_groups + 1)
+        plot_df['_y'] = plot_df[y] / 2
+        renderer = f.rect(
+                x='_x',
+                y='_y',
+                width=1 / (num_groups + 1),
+                height=y,
+                color=Pastel1_9[i],
+                source=ColumnDataSource(plot_df),
+                **glyph_args
+        )
+        renderer = f.rect(
+                x='_x',
+                y='_y',
+                width=1 / (num_groups + 1),
+                height=y,
+                color=Pastel1_9[i],
+                legend=group.title(),
+                source=ColumnDataSource(plot_df),
+                **glyph_args
+        )
+        if num_groups == 1:
+            f.add_tools(HoverTool(renderers=[renderer], tooltips=[
+                (fig_args['x_axis_label'], '@{}'.format(x)),
+                (fig_args['y_axis_label'], '@{}'.format(y)),
+            ]))
+        else:
+            f.add_tools(HoverTool(renderers=[renderer], tooltips=[
+                (groupby.title(), '@{}'.format(groupby)),
+                (fig_args['x_axis_label'], '@{}'.format(x)),
+                (fig_args['y_axis_label'], '@{}'.format(y)),
+            ]))
     return f
 
 def line_chart(df, x, y, fig_args, glyph_args):
