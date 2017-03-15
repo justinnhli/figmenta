@@ -11,12 +11,14 @@
 			table.properties {border-collapse:collapse;}
 			table.properties th, table.properties td {padding:0.1ex 1ex; vertical-align:middle;}
 			.section-heading {font-size:larger; line-height:1.5em;}
+			.example-heading {font-size:60; font-weight:bold;}
 		</style>
 	</head>
 
 	<body>
-		<table id="main">
+		<table id="main" style="border-spacing: 30px">
 			<tr>
+				<!--<tr class= "example-heading">Grip Strength over Age</tr>-->
 				<td>
 					<a href="https://www.reddit.com/r/dataisbeautiful/comments/4vcxd0/almost_all_men_are_stronger_than_almost_all_women/">
 						<img src="case-study-images/grip-strength.png" alt="Grip Strength over Age">
@@ -107,6 +109,138 @@
 							<td>Many</td>
 						</tr>
 						<tr><th colspan="4" class="section-heading">Population (0)</th></tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<a href="https://setis.ec.europa.eu/setis-reports/setis-magazine/power-storage/mapping-of-energy-storage-innovation-europe">
+						<img src="case-study-images/energy-storage-innovation-EU.JPG" alt="Mapping of Energy Storage Innovation in Europe">
+					</a>
+				</td>
+				<td>
+					<table class="properties">
+						<tr>
+							<th>Variable</th>
+							<th>Visual Representation</th>
+							<th>Dimension Type</th>
+							<th># Uniques</th>
+						</tr>
+						<tr><th colspan="4" class="section-heading">X (4)</th></tr>
+						<tr>
+							<th>Level of the Electricity Grid</th>
+							<td>Top X Aixs</td>
+							<td>Catagorical</td>
+							<td>Few</td>
+						</tr>
+						<tr>
+							<th>Field of Energy Storage</th>
+							<td>Right Y Axis</td>
+							<td>Categorical</td>
+							<td>Few</td>
+						</tr>
+						<tr>
+							<th>Stage of Development</th>
+							<td>Left Y Axis</td>
+							<td>Categorical</td>
+							<td>Few</td>
+						</tr>
+						<tr>
+							<th>Technological Oriendtation</th>
+							<td>Color</td>
+							<td>Categorical</td>
+							<td>Few</td>
+						</tr>
+						<tr><th colspan="4" class="section-heading">Y (1)</th></tr>
+						<tr>
+							<th>Number of Project</th>
+							<td>Down X Axis</td>
+							<td>Sequential</td>
+							<td>Many</td>
+						</tr>
+						<tr><th colspan="4" class="section-heading">Population (Shown as Y)</th></tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<a href="http://metrocosm.com/election-2016-map-3d/">
+						<img src="case-study-images/election-map-by-county.png" alt="County-level Results from the 2016 U.S. Presidential Election">
+					</a>
+				</td>
+				<td>
+					<table class="properties">
+						<tr>
+							<th>Variable</th>
+							<th>Visual Representation</th>
+							<th>Dimension Type</th>
+							<th># Uniques</th>
+						</tr>
+						<tr><th colspan="4" class="section-heading">X (1)</th></tr>
+						<tr>
+							<th>County</th>
+							<td>Shape</td>
+							<td>Catagorical</td>
+							<td>Many</td>
+						</tr>
+						<tr><th colspan="4" class="section-heading">Y (2)</th></tr>
+						<tr>
+							<th>Total Number of Votes</th>
+							<td>Height</td>
+							<td>Numerical</td>
+							<td>Many</td>
+						</tr>
+						<tr>
+							<th>Winner and Margin of Victory</th>
+							<td>Color</td>
+							<td>Catagorical</td>
+							<td>Few</td>
+						</tr>
+						<tr><th colspan="4" class="section-heading">Population (0)</th></tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<a href="http://www.dartmouth.edu/~voterfraud/">
+						<img src="case-study-images/residuals-and-hispanic-non-citizens.png" alt="Residuals and Hispanic Non-Citizens">
+					</a>
+				</td>
+				<td>
+					<table class="properties">
+						<tr>
+							<th>Variable</th>
+							<th>Visual Representation</th>
+							<th>Dimension Type</th>
+							<th># Uniques</th>
+						</tr>
+						<tr><th colspan="4" class="section-heading">X (3)</th></tr>
+						<tr>
+							<th>Percentage </th>
+							<td>X Axis</td>
+							<td>Numerican</td>
+							<td>Many</td>
+						</tr>
+						<tr>
+							<th>Battle Ground?</th>
+							<td>Color</td>
+							<td>Catagorical</td>
+							<td>2</td>
+						</tr>
+						<tr>
+							<th>?</th>
+							<td>Plot</td>
+							<td>Catagorical</td>
+							<td>2</td>
+						</tr>
+						<tr><th colspan="4" class="section-heading">Y (1)</th></tr>
+						<tr>
+							<th>Residuals</th>
+							<td>Y Axis</td>
+							<td>Numerical</td>
+							<td>Many</td>
+						</tr>
+						<tr><th colspan="4" class="section-heading">Population (1)</th></tr>
 					</table>
 				</td>
 			</tr>
