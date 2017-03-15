@@ -5,7 +5,7 @@ import numpy as np
 import pandas as pd
 from bokeh.plotting import figure, ColumnDataSource
 from bokeh.models import HoverTool
-from bokeh.palettes import *
+from bokeh.palettes import Pastel1_9
 
 class Dimension:
     @enum_unique
@@ -95,60 +95,39 @@ def dispatch_chart(df, x_dims, ys, fig_args, glyph_args):
                 else:
                     return # heat map
 
-
-
-
-
 def bar_chart(df, x, y, fig_args, glyph_args, groupby=None):
     if groupby is None:
         df['_groupby'] = pd.Series(df.shape[0] * [''])
         groupby = '_groupby'
-    fig_args.setdefault('x_range', list(df[x].unique())) # what is list(df[x])
+    x_values = list(df[x].unique())
+    x_locs = dict((x, i) for i, x in enumerate(x_values))
+    fig_args.setdefault('x_range', x_values)
     fig_args.setdefault('x_axis_label', x.title())
-    if min(df[y]) >= 0:
-        fig_args.setdefault('y_range', [0, 1.1 * max(df[y])])
-    elif max(df[y]) <= 0:
-        fig_args.setdefault('y_range', [1.1 * min(df[y]), 0])
-    else:
-        fig_args.setdefault('y_range', [1.1 * min(df[y]), 1.1 * max(df[y])])
+    set_y_range(fig_args, df[y])
     fig_args.setdefault('y_axis_label', y.title())
 
     num_groups = len(list(df[groupby].unique()))
+    glyph_args['x'] = '_x'
+    glyph_args['y'] = '_y'
+    glyph_args['width'] = 1 / (num_groups + 1)
+    glyph_args['height'] = y
     f = figure(**fig_args)
     for i, group in enumerate(df[groupby].unique()):
         plot_df = df[df[groupby] == group].copy().reset_index()
-        plot_df['_x'] = plot_df.index + (num_groups + i) / (num_groups + 1)
+        plot_df['_x'] = plot_df[x].map(lambda x: x_locs[x] + (2 * i + num_groups + 3) / (2 * num_groups + 2))
         plot_df['_y'] = plot_df[y] / 2
+        tooltips = [
+            (fig_args['x_axis_label'], '@{}'.format(x)),
+            (fig_args['y_axis_label'], '@{}'.format(y)),
+        ]
+        if num_groups > 1:
+            tooltips.append(tuple([groupby.title(), '@{}'.format(groupby)]))
         renderer = f.rect(
-                x='_x',
-                y='_y',
-                width=1 / (num_groups + 1),
-                height=y,
-                color=Pastel1_9[i],
-                source=ColumnDataSource(plot_df),
-                **glyph_args
-        )
-        renderer = f.rect(
-                x='_x',
-                y='_y',
-                width=1 / (num_groups + 1),
-                height=y,
-                color=Pastel1_9[i],
                 legend=group.title(),
+                color=Pastel1_9[i],
                 source=ColumnDataSource(plot_df),
-                **glyph_args
-        )
-        if num_groups == 1:
-            f.add_tools(HoverTool(renderers=[renderer], tooltips=[
-                (fig_args['x_axis_label'], '@{}'.format(x)),
-                (fig_args['y_axis_label'], '@{}'.format(y)),
-            ]))
-        else:
-            f.add_tools(HoverTool(renderers=[renderer], tooltips=[
-                (groupby.title(), '@{}'.format(groupby)),
-                (fig_args['x_axis_label'], '@{}'.format(x)),
-                (fig_args['y_axis_label'], '@{}'.format(y)),
-            ]))
+                **glyph_args)
+        f.add_tools(HoverTool(renderers=[renderer], tooltips=tooltips))
     return f
 
 def line_chart(df, x, y, fig_args, glyph_args):
@@ -188,3 +167,13 @@ def scatter_plot(df, x, y, fig_args, glyph_args):
         (y, '@{}'.format(y)),
     ]))
     return f
+
+def set_y_range(fig_args, values):
+    minimum = min(values)
+    maximum = max(values)
+    if minimum >= 0:
+        fig_args.setdefault('y_range', [0, 1.1 * maximum])
+    elif max(df[y]) <= 0:
+        fig_args.setdefault('y_range', [1.1 * minimum, 0])
+    else:
+        fig_args.setdefault('y_range', [1.1 * minimum, 1.1 * maximum])
