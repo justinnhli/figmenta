@@ -173,7 +173,7 @@ def set_y_range(fig_args, values):
     maximum = max(values)
     if minimum >= 0:
         fig_args.setdefault('y_range', [0, 1.1 * maximum])
-    elif max(df[y]) <= 0:
+    elif maximum <= 0:
         fig_args.setdefault('y_range', [1.1 * minimum, 0])
     else:
         fig_args.setdefault('y_range', [1.1 * minimum, 1.1 * maximum])
