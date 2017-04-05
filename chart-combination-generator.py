@@ -48,10 +48,24 @@ for dimensions in Dimension:
 print(result)
 
 
+# generate smaller set of combination
+# y dimension (Numeric) + x dimension (Catagorical) + x extra dimensions
+fixed_x_dimension = ["Cata"]
+fixed_y_dimension = ["Num"]
+x_dimensions = ["Cata", "Seq", "Num"]
+y_dimensions = ["Cata", "Seq", "Num"]
+result_new = []
+
+for x in range(4):
+    for subset in itertools.combinations(x_dimensions, x):
+        k = ["y base dimension: Num", "x base dimension: Cata;", "extra dimension(s)", subset]
+        result_new.append(k)
+print(result_new)
+
+
 # with open('Chart Combination.txt', 'w') as fp:
 #     fp.write('\n'.join('%s %s' % x for x in result))
 import csv
 with open('Chart Combination.csv', 'w', newline='') as f:
     writer = csv.writer(f)
     writer.writerows(result)
-    # FIXME
