@@ -32,25 +32,26 @@
 							<th>Dimension Type</th>
 							<th># Uniques</th>
 						</tr>
-						<tr><th colspan="4" class="section-heading">X (2)</th></tr>
+						<tr><th colspan="4" class="section-heading">Base X (1)</th></tr>
 						<tr>
 							<th>Age</th>
 							<td>X Axis</td>
 							<td>Sequential</td>
 							<td>Many</td>
 						</tr>
-						<tr>
-							<th>Sex</th>
-							<td>Color</td>
-							<td>Categorical</td>
-							<td>2</td>
-						</tr>
-						<tr><th colspan="4" class="section-heading">Y (1)</th></tr>
+						<tr><th colspan="4" class="section-heading">Base Y (1)</th></tr>
 						<tr>
 							<th>Grip Strength</th>
 							<td>Y Axis</td>
 							<td>Numeric</td>
 							<td>Many</td>
+						</tr>
+						<tr><th colspan="4" class="section-heading">Additional Dimension (1)</th></tr>
+						<tr>
+							<th>Sex</th>
+							<td>Color</td>
+							<td>Categorical</td>
+							<td>2</td>
 						</tr>
 						<tr><th colspan="4" class="section-heading">Population (1)</th></tr>
 						<tr>
@@ -76,18 +77,26 @@
 							<th>Dimension Type</th>
 							<th># Uniques</th>
 						</tr>
-						<tr><th colspan="4" class="section-heading">X (4)</th></tr>
+						<tr><th colspan="4" class="section-heading">Base X (1)</th></tr>
 						<tr>
 							<th>Days in Office</th>
 							<td>X Axis</td>
 							<td>Sequential</td>
 							<td>Many</td>
 						</tr>
+						<tr><th colspan="4" class="section-heading">Base Y (1)</th></tr>
+						<tr>
+							<th>Approval Rate</th>
+							<td>Y Axis</td>
+							<td>Numeric</td>
+							<td>Many</td>
+						</tr>
+						<tr><th colspan="4" class="section-heading">Additional Dimension (3)</th></tr>
 						<tr>
 							<th>President</th>
 							<td>Line</td>
 							<td>Categorical</td>
-							<td>Few</td>
+							<td>Many</td>
 						</tr>
 						<tr>
 							<th>President's Party</th>
@@ -96,17 +105,10 @@
 							<td>2</td>
 						</tr>
 						<tr>
-							<th>Rating Party</th>
+							<th>Support among Parties</th>
 							<td>Separate Chart</td>
 							<td>Categorical</td>
 							<td>3</td>
-						</tr>
-						<tr><th colspan="4" class="section-heading">Y (1)</th></tr>
-						<tr>
-							<th>Approval</th>
-							<td>Y Axis</td>
-							<td>Numeric</td>
-							<td>Many</td>
 						</tr>
 						<tr><th colspan="4" class="section-heading">Population (0)</th></tr>
 					</table>
@@ -126,37 +128,38 @@
 							<th>Dimension Type</th>
 							<th># Uniques</th>
 						</tr>
-						<tr><th colspan="4" class="section-heading">X (4)</th></tr>
+						<tr><th colspan="4" class="section-heading">Base X (3)</th></tr>
 						<tr>
 							<th>Level of the Electricity Grid</th>
 							<td>Top X Aixs</td>
 							<td>Categorical</td>
-							<td>Few</td>
+							<td>5</td>
 						</tr>
 						<tr>
 							<th>Field of Energy Storage</th>
-							<td>Outter Y Axis</td>
+							<td>Outter Y Axis(right)</td>
 							<td>Categorical</td>
-							<td>Few</td>
+							<td>6</td>
 						</tr>
 						<tr>
 							<th>Stage of Development</th>
-							<td>Inner Y Axis</td>
+							<td>Inner Y Axis(left)</td>
 							<td>Categorical</td>
-							<td>Few</td>
+							<td>6</td>
 						</tr>
-						<tr>
-							<th>Technological Oriendtation</th>
-							<td>Color</td>
-							<td>Categorical</td>
-							<td>Few</td>
-						</tr>
-						<tr><th colspan="4" class="section-heading">Y (1)</th></tr>
+						<tr><th colspan="4" class="section-heading">Base Y (1)</th></tr>
 						<tr>
 							<th>Number of Project</th>
-							<td>Inner X Axis</td>
+							<td>Button X Axis</td>
 							<td>Sequential</td>
 							<td>Many</td>
+						</tr>
+						<tr><th colspan="4" class="section-heading">Additional Dimension (1)</th></tr>
+						<tr>
+							<th>Technological Orientation</th>
+							<td>Color</td>
+							<td>Categorical</td>
+							<td>5</td>
 						</tr>
 						<tr><th colspan="4" class="section-heading">Population (Shown as Y)</th></tr>
 					</table>
@@ -176,31 +179,32 @@
 							<th>Dimension Type</th>
 							<th># Uniques</th>
 						</tr>
-						<tr><th colspan="4" class="section-heading">X (1)</th></tr>
+						<tr><th colspan="4" class="section-heading">Base X (1)</th></tr>
 						<tr>
 							<th>County</th>
 							<td>Shape</td>
-							<td>Categorical</td>
+							<td>Geographical</td>
 							<td>Many</td>
 						</tr>
-						<tr><th colspan="4" class="section-heading">Y (3)</th></tr>
+						<tr><th colspan="4" class="section-heading">Base Y (1)</th></tr>
 						<tr>
 							<th>Total Number of Votes</th>
 							<td>Height</td>
 							<td>Numeric</td>
 							<td>Many</td>
 						</tr>
-						<tr>
-							<th>Winner and Margin of Victory</th>
-							<td>Color</td>
-							<td>Categorical</td>
-							<td>Few</td>
-						</tr>
+						<tr><th colspan="4" class="section-heading">Additional Dimension (2)</th></tr>
 						<tr>
 							<th>Win Party</th>
-							<td>Saturation</td>
-							<td>Catagorical</td>
+							<td>Color</td>
+							<td>Categorical</td>
 							<td>2</td>
+						</tr>
+						<tr>
+							<th>Winner and Margin of Victory</th>
+							<td>Saturation</td>
+							<td>Categorical</td>
+							<td>Few</td>
 						</tr>
 						<tr><th colspan="4" class="section-heading">Population (0)</th></tr>
 					</table>
@@ -220,33 +224,40 @@
 							<th>Dimension Type</th>
 							<th># Uniques</th>
 						</tr>
-						<tr><th colspan="4" class="section-heading">X (3)</th></tr>
+						<tr><th colspan="4" class="section-heading">Base X (1)</th></tr>
 						<tr>
 							<th>Percentage </th>
 							<td>X Axis</td>
 							<td>Numeric</td>
 							<td>Many</td>
 						</tr>
-						<tr>
-							<th>Battle Ground?</th>
-							<td>Color</td>
-							<td>Categorical</td>
-							<td>2</td>
-						</tr>
-						<tr>
-							<th>?</th>
-							<td>Plot</td>
-							<td>Categorical</td>
-							<td>2</td>
-						</tr>
-						<tr><th colspan="4" class="section-heading">Y (1)</th></tr>
+						<tr><th colspan="4" class="section-heading">Base Y (1)</th></tr>
 						<tr>
 							<th>Residuals</th>
 							<td>Y Axis</td>
 							<td>Numeric</td>
 							<td>Many</td>
 						</tr>
+						<tr><th colspan="4" class="section-heading">Additional Dimension (2)</th></tr>
+						<tr>
+							<th>Battle Ground State</th>
+							<td>Color</td>
+							<td>Categorical</td>
+							<td>2</td>
+						</tr>
+						<tr>
+							<th>President</th>
+							<td>Separate Chart</td>
+							<td>Categorical</td>
+							<td>2</td>
+						</tr>
 						<tr><th colspan="4" class="section-heading">Population (1)</th></tr>
+						<tr>
+							<th>Sample Size</th>
+							<td>Glyph Size</td>
+							<td>Numeric</td>
+							<td>Many</td>
+						</tr>
 					</table>
 				</td>
 			</tr>
@@ -264,27 +275,28 @@
 							<th>Dimension Type</th>
 							<th># Uniques</th>
 						</tr>
-						<tr><th colspan="4" class="section-heading">X (2)</th></tr>
+						<tr><th colspan="4" class="section-heading">Base X (1)</th></tr>
 						<tr>
 							<th>Sibling Type</th>
 							<td>X Axis</td>
 							<td>Categorical</td>
 							<td>7</td>
 						</tr>
-						<tr>
-							<th>Behavioral Trait</th>
-							<td>Color</td>
-							<td>Categorical</td>
-							<td>5</td>
-						</tr>
-						<tr><th colspan="4" class="section-heading">Y (1)</th></tr>
+						<tr><th colspan="4" class="section-heading">Base Y (1)</th></tr>
 						<tr>
 							<th>Correlation</th>
 							<td>Y Axis</td>
 							<td>Numeric</td>
 							<td>Many</td>
 						</tr>
-						<tr><th colspan="4" class="section-heading">Population (1)</th></tr>
+						<tr><th colspan="4" class="section-heading">Additional Dimension (1)</th></tr>
+						<tr>
+							<th>Behavioral Trait</th>
+							<td>Color</td>
+							<td>Categorical</td>
+							<td>5</td>
+						</tr>
+						<tr><th colspan="4" class="section-heading">Population (0)</th></tr>
 					</table>
 				</td>
 			</tr>
@@ -302,33 +314,84 @@
 							<th>Dimension Type</th>
 							<th># Uniques</th>
 						</tr>
-						<tr><th colspan="4" class="section-heading">X (2)</th></tr>
+						<tr><th colspan="4" class="section-heading">Base X (1)</th></tr>
 						<tr>
 							<th>Wage</th>
 							<td>X Axis</td>
-							<td>Numerical</td>
+							<td>Numeric</td>
 							<td>Many</td>
 						</tr>
-						<tr>
-							<th>Industry</th>
-							<td>Individual line</td>
-							<td>Catagorical</td>
-							<td>Many</td>
-						</tr>
-						<tr><th colspan="4" class="section-heading">Y (2)</th></tr>
+						<tr><th colspan="4" class="section-heading">Base Y (1)</th></tr>
 						<tr>
 							<th>Number of Jobs</th>
 							<td>Y Axis</td>
 							<td>Numeric</td>
 							<td>Many</td>
 						</tr>
+						<tr><th colspan="4" class="section-heading">Additional Dimension (2)</th></tr>
 						<tr>
 							<th>Trend of Jobs</th>
 							<td>Color</td>
-							<td>Catagorical</td>
+							<td>Categorical</td>
 							<td>5</td>
 						</tr>
+						<tr>
+							<th>Industry</th>
+							<td>Separate line</td>
+							<td>Categorical</td>
+							<td>Many</td>
+						</tr>
 						<tr><th colspan="4" class="section-heading">Population (0)</th></tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<a href="https://datavizblog.com/2013/05/26/dataviz-history-charles-minards-flow-map-of-napoleons-russian-campaign-of-1812-part-5/">
+						<img src="case-study-images/minard-chart.png" alt="Minard Chart">
+					</a>
+				</td>
+				<td>
+					<table class="properties">
+						<tr>
+							<th>Variable</th>
+							<th>Visual Representation</th>
+							<th>Dimension Type</th>
+							<th># Uniques</th>
+						</tr>
+						<tr><th colspan="4" class="section-heading">Base Dimension</th></tr>
+						<tr>
+							<th>Geography</th>
+							<td>Position on graph</td>
+							<td>Geographical</td>
+							<td>N/A</td>
+						</tr>
+						<tr><th colspan="4" class="section-heading">Additional Dimension (3)</th></tr>
+						<tr>
+							<th>Temperature</th>
+							<td>Line Chart</td>
+							<td>Numerical</td>
+							<td>Many</td>
+						</tr>
+						<tr>
+							<th>Time</th>
+							<td>Line Chart</td>
+							<td>Sequential</td>
+							<td>Many</td>
+						</tr>
+						<tr>
+							<th>Direction</th>
+							<td>Color</td>
+							<td>Geographical</td>
+							<td>2</td>
+						</tr>
+						<tr><th colspan="4" class="section-heading">Population (1)</th></tr>
+						<tr>
+							<th>Size of Army</th>
+							<td>Width</td>
+							<td>Numerical</td>
+							<td>Many</td>
+						</tr>
 					</table>
 				</td>
 			</tr>
