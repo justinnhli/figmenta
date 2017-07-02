@@ -5,7 +5,7 @@ import numpy as np
 import pandas as pd
 from bokeh.plotting import figure, ColumnDataSource
 from bokeh.models import HoverTool
-from bokeh.palettes import Pastel1_9
+from bokeh.palettes import Pastel1_9, Category10_10
 
 class Dimension:
     @enum_unique
@@ -80,7 +80,7 @@ def dispatch_chart(df, x_dims, ys, fig_args, glyph_args):
                 elif x_dims[1].datatype == Dimension.Type.SEQUENCE:
                     return line_chart(df, x_dims[0].name, ys[0], fig_args, glyph_args) # with color data respect to x[0]
                 elif x_dims[1].datatype == Dimension.Type.NUMERIC:
-                    return scatter_plot(df, x_dims[0].name, ys[0], fig_args, glyph_args) # with color data by respect to x[0]
+                    return scatter_plot(df, x_dims[1].name, ys[0], fig_args, glyph_args, groupby=x_dims[0].name) # with color data by respect to x[0]
             else:
                 if x_dims[1].datatype ==Dimension.Type.CATEGORICAL:
                    return #  heat map
@@ -152,20 +152,35 @@ def line_chart(df, x, y, fig_args, glyph_args):
     )
     return f
 
-def scatter_plot(df, x, y, fig_args, glyph_args):
+def scatter_plot(df, x, y, fig_args, glyph_args, groupby=None):
+    if groupby is None:
+        df['_groupby'] = pd.Series(df.shape[0] * [''])
+        groupby = '_groupby'
     fig_args.setdefault('x_axis_label', x.title())
     fig_args.setdefault('y_axis_label', y.title())
+
+    num_groups = len(list(df[groupby].unique()))
+    glyph_args['x'] = '_x'
+    glyph_args['y'] = '_y'
     f = figure(**fig_args)
-    renderer = f.circle(
-            x=x,
-            y=y,
-            source=ColumnDataSource(df),
-            **glyph_args
-    )
-    f.add_tools(HoverTool(renderers=[renderer], tooltips=[
-        (x, '@{}'.format(x)),
-        (y, '@{}'.format(y)),
-    ]))
+    for i, group in enumerate(df[groupby].unique()):
+        plot_df = df[df[groupby] == group].copy().reset_index()
+        plot_df['_x'] = plot_df[x]
+        plot_df['_y'] = plot_df[y]
+        tooltips = [
+            (fig_args['x_axis_label'], '@{}'.format(x)),
+            (fig_args['y_axis_label'], '@{}'.format(y)),
+        ]
+        if num_groups > 1:
+            tooltips.append(tuple([groupby.title(), '@{}'.format(groupby)]))
+        renderer = f.circle(
+                legend=group.title(),
+                color=Category10_10[i],
+                source=ColumnDataSource(plot_df),
+                size=5,
+                **glyph_args
+        )
+        f.add_tools(HoverTool(renderers=[renderer], tooltips=tooltips))
     return f
 
 def set_y_range(fig_args, values):
