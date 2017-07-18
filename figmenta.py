@@ -158,6 +158,7 @@ def scatter_plot(df, x, y, fig_args, glyph_args, groupby=None):
         groupby = '_groupby'
     fig_args.setdefault('x_axis_label', x.title())
     fig_args.setdefault('y_axis_label', y.title())
+    set_y_range(fig_args, df[y])
 
     num_groups = len(list(df[groupby].unique()))
     glyph_args['x'] = '_x'
