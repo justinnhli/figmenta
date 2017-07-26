@@ -94,6 +94,9 @@ def dispatch_chart(df, x_dims, ys, fig_args, glyph_args):
                     return None # FIXME colored line plot
                 else:
                     return # heat map
+        elif x_dims[0].datatype == Dimension.Type.NUMERIC:
+            if x_dims[1].datatype == Dimension.Type.CATEGORICAL:
+                return scatter_plot(df, x_dims[0].name, ys[0], fig_args, glyph_args, groupby=x_dims[1].name)
 
 def bar_chart(df, x, y, fig_args, glyph_args, groupby=None):
     if groupby is None:
