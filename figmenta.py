@@ -166,6 +166,7 @@ def scatter_plot(df, x, y, fig_args, glyph_args, groupby=None):
     num_groups = len(list(df[groupby].unique()))
     glyph_args['x'] = '_x'
     glyph_args['y'] = '_y'
+    glyph_args.setdefault('size', 5)
     f = figure(**fig_args)
     for i, group in enumerate(df[groupby].unique()):
         plot_df = df[df[groupby] == group].copy().reset_index()
@@ -181,7 +182,6 @@ def scatter_plot(df, x, y, fig_args, glyph_args, groupby=None):
                 legend=group.title(),
                 color=Category10_10[i],
                 source=ColumnDataSource(plot_df),
-                size=5,
                 **glyph_args
         )
         f.add_tools(HoverTool(renderers=[renderer], tooltips=tooltips))
