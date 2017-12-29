@@ -29,6 +29,8 @@ class Dimension:
                 self.datatype = Dimension.Type.NUMERIC
         num_ys = df.groupby([col]).count()['_y'].drop_duplicates().shape[0] # the number of unique ys
         self.is_injective = (num_ys == 1)
+        # FIXME self.monotonic
+        # FIXME min and max, or range of values in general
 
 def autovis(df, xs=None, ys=None, fig_args=None, glyph_args=None):
     # error check and fill in defaults (what is the defaults?)
