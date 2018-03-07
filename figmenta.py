@@ -91,11 +91,14 @@ def dispatch_chart(df, x_dims, ys, fig_args, glyph_args):
                 elif x_dims[1].datatype == Dimension.Type.NUMERIC:
                     return scatter_plot(df, x_dims[0].name, ys[0], fig_args, glyph_args)
         elif x_dims[0].datatype == Dimension.Type.SEQUENCE:
+            return line_chart(df, x_dims[0].name, ys[0], fig_args, glyph_args)
+            '''
             if x_dims[1].datatype == Dimension.Type.CATEGORICAL:
                 if x_dims[1].num_uniques < 13:  # arbitrary # for x_dim
                     return None # FIXME colored line plot
                 else:
                     return # heat map
+            '''
         elif x_dims[0].datatype == Dimension.Type.NUMERIC:
             if x_dims[1].datatype == Dimension.Type.CATEGORICAL:
                 return scatter_plot(df, x_dims[0].name, ys[0], fig_args, glyph_args, groupby=x_dims[1].name)
