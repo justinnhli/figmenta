@@ -31,6 +31,8 @@ class Dimension:
         self.is_injective = (num_ys == 1)
         # FIXME self.monotonic
         # FIXME min and max, or range of values in general
+    def __str__(self):
+        return str(self.datatype)
 
 def autovis(df, xs=None, ys=None, fig_args=None, glyph_args=None):
     # error check and fill in defaults (what is the defaults?)
@@ -102,6 +104,7 @@ def dispatch_chart(df, x_dims, ys, fig_args, glyph_args):
         elif x_dims[0].datatype == Dimension.Type.NUMERIC:
             if x_dims[1].datatype == Dimension.Type.CATEGORICAL:
                 return scatter_plot(df, x_dims[0].name, ys[0], fig_args, glyph_args, groupby=x_dims[1].name)
+    raise NotImplementedError("don't know what to do with x's={}".format([str(x_dim) for x_dim in x_dims]))
 
 def bar_chart(df, x, y, fig_args, glyph_args, groupby=None):
     if groupby is None:
